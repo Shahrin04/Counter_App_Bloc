@@ -103,7 +103,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
             MaterialButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/second');
+                Navigator.pushNamed(context, '/third');
               },
               child: Text('Go to Third Page'),
               color: widget.color,
