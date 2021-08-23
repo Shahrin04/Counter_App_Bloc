@@ -16,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  //final CounterCubit _counterCubit = CounterCubit();
+  final CounterCubit _counterCubit = CounterCubit();
 
   @override
   Widget build(BuildContext context) {
@@ -25,28 +25,24 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // routes: {
-      //   '/': (context) => BlocProvider.value(
-      //       value: _counterCubit,
-      //       child: HomeScreen(
-      //           title: 'Flutter Demo Home Page', color: Colors.blueAccent)),
-      //   '/second': (context) => BlocProvider.value(
-      //       value: _counterCubit,
-      //       child: SecondPage(title: 'Second Page', color: Colors.redAccent)),
-      //   '/third': (context) => BlocProvider.value(
-      //       value: _counterCubit,
-      //       child: ThirdPage(title: 'Third Page', color: Colors.greenAccent)),
-      // },
-      home: BlocProvider(
-        create: (context) => CounterCubit(),
-        child: HomeScreen(title: 'Flutter Demo Home Page', color: Colors.blueAccent),
-      ),
+      routes: {
+        '/': (context) => BlocProvider.value(
+            value: _counterCubit,
+            child: HomeScreen(
+                title: 'Flutter Demo Home Page', color: Colors.blueAccent)),
+        '/second': (context) => BlocProvider.value(
+            value: _counterCubit,
+            child: SecondPage(title: 'Second Page', color: Colors.redAccent)),
+        '/third': (context) => BlocProvider.value(
+            value: _counterCubit,
+            child: ThirdPage(title: 'Third Page', color: Colors.greenAccent)),
+      },
     );
   }
 
-  // @override
-  // void dispose() {
-  //   _counterCubit.close();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _counterCubit.close();
+    super.dispose();
+  }
 }

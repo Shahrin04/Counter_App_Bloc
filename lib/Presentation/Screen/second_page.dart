@@ -94,7 +94,7 @@ class _SecondPageState extends State<SecondPage> {
               height: 24,
             ),
             MaterialButton(
-              onPressed: (){},
+              onPressed: () {},
               child: Text('Go to Second Page'),
               color: widget.color,
             ),
@@ -103,15 +103,7 @@ class _SecondPageState extends State<SecondPage> {
             ),
             MaterialButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (_) => BlocProvider.value(
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: ThirdPage(
-                        title: 'Third Page',
-                        color: Colors.redAccent,
-                      ),
-                    ))
-                );
+                Navigator.pushNamed(context, '/second');
               },
               child: Text('Go to Third Page'),
               color: widget.color,

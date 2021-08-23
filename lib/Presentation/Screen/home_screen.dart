@@ -96,16 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             MaterialButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => BlocProvider.value(
-                              value: BlocProvider.of<CounterCubit>(context),
-                              child: SecondPage(
-                                title: 'Second Page',
-                                color: Colors.redAccent,
-                              ),
-                            )));
+                Navigator.pushNamed(context, '/second');
               },
               child: Text('Go to Second Page'),
               color: widget.color,
@@ -115,14 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             MaterialButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                    builder: (_) => BlocProvider.value(
-                      value: BlocProvider.of<CounterCubit>(context),
-                      child: ThirdPage(
-                        title: 'Third Page',
-                        color: Colors.redAccent,
-                      ),
-                    )));
+                Navigator.pushNamed(context, '/third');
               },
               child: Text('Go to Third Page'),
               color: widget.color,
