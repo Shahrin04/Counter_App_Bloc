@@ -1,4 +1,6 @@
+import 'package:bloc_tut/Constants/enums.dart';
 import 'package:bloc_tut/Logic/cubit/counter_cubit.dart';
+import 'package:bloc_tut/Logic/cubit/internet_cubit.dart';
 import 'package:bloc_tut/Presentation/Screen/second_page.dart';
 import 'package:bloc_tut/Presentation/Screen/third_page.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +27,20 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
+            BlocBuilder<InternetCubit, InternetState>(
+                builder: (context, state) {
+                  if(state is InternetConnected && state.connectionType == ConnectionType.wifi){
+                    return Text('Wifi', style: TextStyle(color: Colors.greenAccent, fontSize: 35));
+                  }else if(state is InternetConnected && state.connectionType == ConnectionType.mobile){
+                    return Text('Mobile', style: TextStyle(color: Colors.redAccent, fontSize: 35));
+                  }else if(state is InternetDisconnected){
+                    return Text('Disconnected', style: TextStyle(color: Colors.grey, fontSize: 35));
+                  }
+                  return CircularProgressIndicator();
+                }),
+
+            Divider(height: 5),
+
             BlocConsumer<CounterCubit, CounterState>(
               listener: (context, state) {
                 if (state.wasIncremented == true) {
@@ -65,52 +78,52 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
-            SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                FloatingActionButton(
-                  onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).increment();
-                  },
-                  tooltip: 'Increment',
-                  child: Icon(Icons.add),
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                FloatingActionButton(
-                  onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).decrement();
-                  },
-                  tooltip: 'Decrement',
-                  child: Icon(Icons.remove),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            MaterialButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/second');
-              },
-              child: Text('Go to Second Page'),
-              color: widget.color,
-            ),
-            SizedBox(
-              height: 14,
-            ),
-            MaterialButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/third');
-              },
-              child: Text('Go to Third Page'),
-              color: widget.color,
-            ),
+            // SizedBox(
+            //   height: 24,
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     FloatingActionButton(
+            //       onPressed: () {
+            //         BlocProvider.of<CounterCubit>(context).increment();
+            //       },
+            //       tooltip: 'Increment',
+            //       child: Icon(Icons.add),
+            //     ),
+            //     SizedBox(
+            //       width: 5,
+            //     ),
+            //     FloatingActionButton(
+            //       onPressed: () {
+            //         BlocProvider.of<CounterCubit>(context).decrement();
+            //       },
+            //       tooltip: 'Decrement',
+            //       child: Icon(Icons.remove),
+            //     ),
+            //   ],
+            // ),
+            // SizedBox(
+            //   height: 24,
+            // ),
+            // MaterialButton(
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, '/second');
+            //   },
+            //   child: Text('Go to Second Page'),
+            //   color: widget.color,
+            // ),
+            // SizedBox(
+            //   height: 14,
+            // ),
+            // MaterialButton(
+            //   onPressed: () {
+            //     Navigator.pushNamed(context, '/third');
+            //   },
+            //   child: Text('Go to Third Page'),
+            //   color: widget.color,
+            // ),
           ],
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
