@@ -19,114 +19,112 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            BlocBuilder<InternetCubit, InternetState>(
-                builder: (context, state) {
-                  if(state is InternetConnected && state.connectionType == ConnectionType.wifi){
-                    return Text('Wifi', style: TextStyle(color: Colors.greenAccent, fontSize: 35));
-                  }else if(state is InternetConnected && state.connectionType == ConnectionType.mobile){
-                    return Text('Mobile', style: TextStyle(color: Colors.redAccent, fontSize: 35));
-                  }else if(state is InternetDisconnected){
-                    return Text('Disconnected', style: TextStyle(color: Colors.grey, fontSize: 35));
-                  }
-                  return CircularProgressIndicator();
-                }),
-
-            Divider(height: 5),
-
-            BlocConsumer<CounterCubit, CounterState>(
-              listener: (context, state) {
-                if (state.wasIncremented == true) {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text('Incremented !!!'),
-                    duration: Duration(milliseconds: 600),
-                  ));
-                } else if (state.wasIncremented == false) {
-                  Scaffold.of(context).showSnackBar(SnackBar(
-                    content: Text('Decremented !!!'),
-                    duration: Duration(milliseconds: 600),
-                  ));
-                }
-              },
-              builder: (context, state) {
-                if (state.counterValue < 0) {
-                  return Text(
-                    'its negative ' + state.counterValue.toString(),
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                } else if (state.counterValue % 2 == 0) {
-                  return Text(
-                    'its even ' + state.counterValue.toString(),
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                } else if (state.counterValue == 5) {
-                  return Text(
-                    'its five ' + state.counterValue.toString(),
-                    style: Theme.of(context).textTheme.headline4,
-                  );
-                }
-                return Text(
-                  state.counterValue.toString(),
-                  style: Theme.of(context).textTheme.headline4,
-                );
-              },
-            ),
-            // SizedBox(
-            //   height: 24,
-            // ),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     FloatingActionButton(
-            //       onPressed: () {
-            //         BlocProvider.of<CounterCubit>(context).increment();
-            //       },
-            //       tooltip: 'Increment',
-            //       child: Icon(Icons.add),
-            //     ),
-            //     SizedBox(
-            //       width: 5,
-            //     ),
-            //     FloatingActionButton(
-            //       onPressed: () {
-            //         BlocProvider.of<CounterCubit>(context).decrement();
-            //       },
-            //       tooltip: 'Decrement',
-            //       child: Icon(Icons.remove),
-            //     ),
-            //   ],
-            // ),
-            // SizedBox(
-            //   height: 24,
-            // ),
-            // MaterialButton(
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, '/second');
-            //   },
-            //   child: Text('Go to Second Page'),
-            //   color: widget.color,
-            // ),
-            // SizedBox(
-            //   height: 14,
-            // ),
-            // MaterialButton(
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, '/third');
-            //   },
-            //   child: Text('Go to Third Page'),
-            //   color: widget.color,
-            // ),
-          ],
+    return BlocListener<InternetCubit, InternetState>(
+      listener: (context, state) {
+        if (state is InternetConnected &&
+            state.connectionType == ConnectionType.wifi) {
+          BlocProvider.of<CounterCubit>(context).increment();
+        } else if (state is InternetConnected &&
+            state.connectionType == ConnectionType.mobile) {
+          BlocProvider.of<CounterCubit>(context).decrement();
+        }
+        return CircularProgressIndicator();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              BlocConsumer<CounterCubit, CounterState>(
+                listener: (context, state) {
+                  if (state.wasIncremented == true) {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Incremented !!!'),
+                      duration: Duration(milliseconds: 600),
+                    ));
+                  } else if (state.wasIncremented == false) {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Decremented !!!'),
+                      duration: Duration(milliseconds: 600),
+                    ));
+                  }
+                },
+                builder: (context, state) {
+                  if (state.counterValue < 0) {
+                    return Text(
+                      'its negative ' + state.counterValue.toString(),
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  } else if (state.counterValue % 2 == 0) {
+                    return Text(
+                      'its even ' + state.counterValue.toString(),
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  } else if (state.counterValue == 5) {
+                    return Text(
+                      'its five ' + state.counterValue.toString(),
+                      style: Theme.of(context).textTheme.headline4,
+                    );
+                  }
+                  return Text(
+                    state.counterValue.toString(),
+                    style: Theme.of(context).textTheme.headline4,
+                  );
+                },
+              ),
+              // SizedBox(
+              //   height: 24,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   mainAxisSize: MainAxisSize.min,
+              //   children: [
+              //     FloatingActionButton(
+              //       onPressed: () {
+              //         BlocProvider.of<CounterCubit>(context).increment();
+              //       },
+              //       tooltip: 'Increment',
+              //       child: Icon(Icons.add),
+              //     ),
+              //     SizedBox(
+              //       width: 5,
+              //     ),
+              //     FloatingActionButton(
+              //       onPressed: () {
+              //         BlocProvider.of<CounterCubit>(context).decrement();
+              //       },
+              //       tooltip: 'Decrement',
+              //       child: Icon(Icons.remove),
+              //     ),
+              //   ],
+              // ),
+              // SizedBox(
+              //   height: 24,
+              // ),
+              // MaterialButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/second');
+              //   },
+              //   child: Text('Go to Second Page'),
+              //   color: widget.color,
+              // ),
+              // SizedBox(
+              //   height: 14,
+              // ),
+              // MaterialButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/third');
+              //   },
+              //   child: Text('Go to Third Page'),
+              //   color: widget.color,
+              // ),
+            ],
+          ),
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
