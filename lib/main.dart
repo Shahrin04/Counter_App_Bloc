@@ -1,5 +1,6 @@
 import 'package:bloc_tut/Logic/cubit/counter_cubit.dart';
 import 'package:bloc_tut/Logic/cubit/internet_cubit.dart';
+import 'package:bloc_tut/Logic/cubit/settings_cubit.dart';
 import 'package:bloc_tut/Presentation/Route/app_route.dart';
 import 'package:bloc_tut/Presentation/Screen/home_screen.dart';
 import 'package:bloc_tut/Presentation/Screen/second_page.dart';
@@ -28,8 +29,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<InternetCubit>(
             create: (context) => InternetCubit(connectivity: connectivity)),
-        BlocProvider<CounterCubit>(
-            create: (context) => CounterCubit())
+        BlocProvider<CounterCubit>(create: (context) => CounterCubit()),
+        BlocProvider<SettingsCubit>(create: (context) => SettingsCubit())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

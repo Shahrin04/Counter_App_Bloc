@@ -1,6 +1,7 @@
 import 'package:bloc_tut/Logic/cubit/counter_cubit.dart';
 import 'package:bloc_tut/Presentation/Screen/home_screen.dart';
 import 'package:bloc_tut/Presentation/Screen/second_page.dart';
+import 'package:bloc_tut/Presentation/Screen/settings_page.dart';
 import 'package:bloc_tut/Presentation/Screen/third_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,9 +22,10 @@ class AppRoute {
         return MaterialPageRoute(
             builder: (_) =>
                 ThirdPage(title: 'Third Page', color: Colors.greenAccent));
+      case '/settings':
+        return MaterialPageRoute(builder: (_) => Settings(title: 'Settings', color: Colors.grey.shade700,));
       default:
         return null;
     }
   }
-
 }

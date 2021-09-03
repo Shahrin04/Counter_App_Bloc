@@ -22,6 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(icon: Icon(Icons.settings), onPressed: () => Navigator.pushNamed(context, '/settings')),
+        ],
       ),
       body: Center(
         child: Column(
