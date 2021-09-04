@@ -15,4 +15,22 @@ class SettingsState extends Equatable {
 
   @override
   List<Object> get props => [appNotification, emailNotification];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'appNotification': this.appNotification,
+      'emailNotification': this.emailNotification,
+    };
+  }
+
+  String toJson() => jsonEncode(toMap());
+
+  factory SettingsState.fromJson(String source) => SettingsState.fromMap(jsonDecode(source));
+
+  factory SettingsState.fromMap(Map<String, dynamic> map) {
+    return SettingsState(
+      appNotification: map['appNotification'] as bool,
+      emailNotification: map['emailNotification'] as bool,
+    );
+  }
 }
