@@ -26,4 +26,7 @@ class CounterState extends Equatable {
       wasIncremented: map['wasIncremented'] as bool,
     );
   }
+
+  @override
+  String toString() => 'CounterState(counterValue: $counterValue, wasIncremented: $wasIncremented)';
 }
