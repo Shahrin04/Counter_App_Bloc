@@ -71,6 +71,7 @@ class _ThirdPageState extends State<ThirdPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 FloatingActionButton(
+                  heroTag: Text('${widget.title}'),
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).increment();
                   },
@@ -81,6 +82,7 @@ class _ThirdPageState extends State<ThirdPage> {
                   width: 5,
                 ),
                 FloatingActionButton(
+                  heroTag: Text('${widget.title} 2nd'),
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).decrement();
                   },

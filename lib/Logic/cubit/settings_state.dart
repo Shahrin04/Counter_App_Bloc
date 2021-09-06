@@ -25,7 +25,8 @@ class SettingsState extends Equatable {
 
   String toJson() => jsonEncode(toMap());
 
-  factory SettingsState.fromJson(String source) => SettingsState.fromMap(jsonDecode(source));
+  factory SettingsState.fromJson(String source) =>
+      SettingsState.fromMap(jsonDecode(source));
 
   factory SettingsState.fromMap(Map<String, dynamic> map) {
     return SettingsState(
@@ -33,4 +34,8 @@ class SettingsState extends Equatable {
       emailNotification: map['emailNotification'] as bool,
     );
   }
+
+  @override
+  String toString() =>
+      'SettingsState(appNotification: $appNotification, emailNotification: $emailNotification)';
 }

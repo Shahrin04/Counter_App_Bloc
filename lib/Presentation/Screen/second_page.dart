@@ -72,6 +72,7 @@ class _SecondPageState extends State<SecondPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 FloatingActionButton(
+                  heroTag: Text('${widget.title}'),
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).increment();
                   },
@@ -82,6 +83,7 @@ class _SecondPageState extends State<SecondPage> {
                   width: 5,
                 ),
                 FloatingActionButton(
+                  heroTag: Text('${widget.title} 2nd'),
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).decrement();
                   },

@@ -1,6 +1,7 @@
 import 'package:bloc_tut/Logic/cubit/counter_cubit.dart';
 import 'package:bloc_tut/Logic/cubit/internet_cubit.dart';
 import 'package:bloc_tut/Logic/cubit/settings_cubit.dart';
+import 'package:bloc_tut/Logic/utility/app_bloc_observer.dart';
 import 'package:bloc_tut/Presentation/Route/app_route.dart';
 import 'package:bloc_tut/Presentation/Screen/home_screen.dart';
 import 'package:bloc_tut/Presentation/Screen/second_page.dart';
@@ -14,6 +15,9 @@ import 'package:path_provider/path_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
+
+  Bloc.observer = AppBlocObserver();
+
   runApp(MyApp(
     appRoute: AppRoute(),
     connectivity: Connectivity(),
